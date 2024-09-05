@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    bean 태그로 baen객체 등록, id가 bean이름, class가 이 bean의 실제 객체-->
+<!--    bean 생성할 때 특정 객체를 의존한다면 constructor-arg를 통해 필요한 객체 주입, name은 주입하는 객체의 자유이름,ref는 xml 파일 내에 bean으로 등록한 주입객체의 이름 -->
+
+    <bean id="memberService" class="hello.core.member.MemberServiceImpl">
+        <constructor-arg name="memberRepository" ref="memberRepository"/>
+    </bean>
+
+    <bean id="orderService" class="hello.core.order.OrderServiceImpl">
+        <constructor-arg name="memberRepository" ref="memberRepository"/>
+        <constructor-arg name="discountPolicy" ref="discountPolicy"/>
+    </bean>
+
+    <bean id="memberRepository" class="hello.core.member.MemoryMemberRepository"/>
+
+    <bean id="discountPolicy" class="hello.core.discount.FixDiscountPolicy"/>
+</beans>
